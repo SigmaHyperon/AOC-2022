@@ -34,6 +34,18 @@ export class Lists {
 			throw "window out of bounds";
 		return list.slice(index, index + width);
 	}
+
+	static group<T>(list: T[], width: number): T[][] {
+		const res: T[][] = [];
+		try {
+			for(let i = 0; i < list.length; i += width) {
+				res.push(this.window(list, i, width));
+			}
+		} catch(e) {
+
+		}
+		return res;
+	}
 }
 
 export class Sets {
