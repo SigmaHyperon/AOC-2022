@@ -29,7 +29,7 @@ function part1(): number | string {
 }
 
 function part2(): number | string {
-	return values.filter( v => v.left.a <= v.right.a && v.left.b >= v.right.a || v.left.a <= v.right.b && v.left.b >= v.right.b || v.right.a <= v.left.a && v.right.b >= v.left.a || v.right.a <= v.left.b && v.right.b >= v.left.b).length;
+	return values.filter( v => !(v.left.b < v.right.a || v.left.a > v.right.b)).length;
 }
 
 Solver.create()
