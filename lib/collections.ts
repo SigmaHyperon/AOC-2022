@@ -56,6 +56,13 @@ export class Sets {
 	}
 }
 
+export enum Direction {
+	Up,
+	Down,
+	Left,
+	Right
+}
+
 export class Matrix<T> {
 	matrix: T[][];
 	height: number;
@@ -112,6 +119,30 @@ export class Matrix<T> {
 			const current = this.valueAt(x,y);
 			const replaceWith = manipulator(current);
 			this.matrix[y][x] = replaceWith;
+		}
+	}
+
+	public isEdge(x: number, y: number): boolean {
+		return x === 0 || y === 0 || x === this.width - 1 || y === this.height - 1;
+	}
+
+	public rayCast(x: number, y: number, direction: Direction): T[] {
+		if(direction === Direction.Left) {
+			return this.matrix[y].slice(0, x).reverse();
+		} else if(direction === Direction.Right) {
+			return this.matrix[y].slice(x + 1);
+		} else if(direction === Direction.Up) {
+			const res: T[] = [];
+			for(let i = 0; i < y; i++) {
+				res.push(this.valueAt(x, i));
+			}
+			return res.reverse();
+		} else {
+			const res: T[] = [];
+			for(let i = y + 1; i < this.height; i++) {
+				res.push(this.valueAt(x, i));
+			}
+			return res;
 		}
 	}
 
