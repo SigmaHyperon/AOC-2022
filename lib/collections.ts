@@ -178,3 +178,15 @@ export class PriorityQueue<T> {
 		return this.queue.shift()?.value;
 	}
 }
+
+export function isNode<T>(element: TreeNode<T> | T): element is TreeNode<T> {
+	return typeof element === "object" && "ident" in element && element.ident === "node";
+}
+
+export class TreeNode<T> {
+	ident = "node";
+	children: (TreeNode<T> | T)[];
+	constructor() {
+		this.children = [];
+	}
+}
