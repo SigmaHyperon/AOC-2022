@@ -89,6 +89,10 @@ export class Matrix<T> {
 		return this.hasValueAt(x, y) ? this.matrix[y][x] : null; 
 	}
 
+	public matrixValueAt(x: number, y: number): MatrixValue<T> | null {
+		return this.hasValueAt(x, y) ? new MatrixValue(x, y, this.matrix[y][x]) : null; 
+	}
+
 	public neighbours(x: number, y: number, includeDiagonal: boolean = false): MatrixValue<T>[] {
 		const neighbours: MatrixValue<T>[] = [];
 		neighbours.push(new MatrixValue(x, y-1, this.valueAt(x, y-1)));
